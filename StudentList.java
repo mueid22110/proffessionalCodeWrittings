@@ -4,27 +4,35 @@ import java.util.*;
 
 public class StudentList {
     public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("No arguments found!!!");
+            return;
+        }
         if(args[0].equals("a")){
             System.out.println("Loading data ...");
-            try{
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
+            try
+            {
+                BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
                 String st = reader.readLine();
-                String i[] = st.split(",");
-                for(String j : i){
-                    System.out.println(j.trim());
+                if (st != null) {
+                    String i[] = st.split(",");
+                    for (String j : i) {
+                        System.out.println(j.trim());
+                    }
                 }
+                reader.close();
+                System.out.println("Data Loaded.");
             }
-            catch (Exception e){}
-            System.out.println("Data Loaded.");
+            catch (Exception e){
+                System.out.println("failed to load data!!!");
+            }
+
         } else if (args[0].equals("r")) {
             System.out.println("Loading data ...");
             try{
-                BufferedReader s = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
-                String r = s.readLine(); System.out.println(r);
+                BufferedReader s = new BufferedReader(new InputStreamReader(new FileInputStream("students.txt")));
+                String r = s.readLine();
+                System.out.println(r);
                 String i[] = r.split(",");
                 Random x = new Random();
                 int y = x.nextInt();
