@@ -4,32 +4,46 @@ import java.util.*;
 
 public class StudentList {
     public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("No arguments found!!!");
+            return;
+        }
         if(args[0].equals("a")){
             System.out.println("Loading data ...");
-            try{
-                BufferedReader s = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
-                String r = s.readLine(); String i[] = r.split(",");
-                for(String j : i){
-                    System.out.println(j);
+            try
+            {
+                BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
+                String st = reader.readLine();
+                if (st != null) {
+                    String i[] = st.split(",");
+                    for (String j : i) {
+                        System.out.println(j.trim());
+                    }
                 }
+                reader.close();
+                System.out.println("Data Loaded.");
             }
-            catch (Exception e){}
-            System.out.println("Data Loaded.");
+            catch (Exception e){
+                System.out.println("failed to load data!!!");
+            }
+
         } else if (args[0].equals("r")) {
             System.out.println("Loading data ...");
             try{
-                BufferedReader s = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
-                String r = s.readLine(); System.out.println(r);
-                String i[] = r.split(",");
-                Random x = new Random();
-                int y = x.nextInt();
-                System.out.println(i[y]);
-            } catch (Exception e){}
-            System.out.println("Data Loaded.");
+                BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
+                String st = reader.readLine();
+                if (st != null) {
+                    String i[] = st.split(",");
+                    Random random = new Random();
+                    int y = random.nextInt(i.length);
+                    System.out.println(i[y].trim());
+                }
+                reader.close();
+                System.out.println("Data Loaded.");
+            } catch (Exception e){
+                System.out.println("failed to load data!!!");
+            }
+
         } else if (args[0].equals("+")) {
             System.out.println("Loading data ...");
             try{
@@ -67,29 +81,21 @@ public class StudentList {
                 System.out.println("No Data Found!!!");
             }
             System.out.println("Data Loaded.");
-        } else if (args[0].contains("c")) {
-            System.out.println("Loading Data ...");
-            try{
-                BufferedReader s = new BufferedReader(
-                        new InputStreamReader(
-                                new FileInputStream("students.txt")));
-                String D = s.readLine();
-                String[] word = D.split(",");
-                /*char a[] = D.toCharArray();
-                boolean in_word = false;
-                int count = 0;
-                for (char c : a){
-                    if (c == ' '){
-                        if (!in_word) {
-                            count++; in_word = true;
-                        }else {
-                            in_word = false;
-                        }
-                    }
-                }*/
-                System.out.println(word.length + "word(s) found " + D.length()+" Characters.");
-            } catch (Exception e) {}
-            System.out.println("Data Loaded.");
+        } else if (args[0].equals("c")) {
+            System.out.println("Loading data ...");
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
+                String st = reader.readLine();
+                if (st != null) {
+                    String i[] = st.split(",");
+                    System.out.println(i.length + " word(s) found.");
+                }
+                reader.close();
+                System.out.println("Data Loaded.");
+            } catch (Exception e) {
+                System.out.println("Error reading file.");
+            }
+
         }
     }
 }
